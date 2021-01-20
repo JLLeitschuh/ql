@@ -19,6 +19,7 @@ import semmle.code.java.frameworks.javase.WebSocket
 import semmle.code.java.frameworks.android.Android
 import semmle.code.java.frameworks.android.Intent
 import semmle.code.java.frameworks.play.Play
+import semmle.code.java.frameworks.ratpack.RatpackHttp
 import semmle.code.java.frameworks.spring.SpringWeb
 import semmle.code.java.frameworks.spring.SpringController
 import semmle.code.java.frameworks.spring.SpringWebClient
