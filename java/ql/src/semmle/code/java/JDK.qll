@@ -220,9 +220,7 @@ class MethodSystemGetProperty extends Method {
  * Any method access to a method named `getProperty` on class `java.lang.System`.
  */
 class MethodAccessSystemGetProperty extends MethodAccess {
-  MethodAccessSystemGetProperty() {
-    getMethod() instanceof MethodSystemGetProperty
-  }
+  MethodAccessSystemGetProperty() { getMethod() instanceof MethodSystemGetProperty }
 
   /**
    * Holds true if this is a compile-time constant call for the specified `propertyName`.
