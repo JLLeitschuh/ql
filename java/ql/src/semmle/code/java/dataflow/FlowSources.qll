@@ -19,7 +19,7 @@ import semmle.code.java.frameworks.javase.WebSocket
 import semmle.code.java.frameworks.android.Android
 import semmle.code.java.frameworks.android.Intent
 import semmle.code.java.frameworks.play.Play
-import semmle.code.java.frameworks.ratpack.RatpackHttp
+import semmle.code.java.frameworks.ratpack.Ratpack
 import semmle.code.java.frameworks.spring.SpringWeb
 import semmle.code.java.frameworks.spring.SpringController
 import semmle.code.java.frameworks.spring.SpringWebClient
@@ -112,6 +112,25 @@ private class PlayParameterSource extends RemoteFlowSource {
   PlayParameterSource() { exists(PlayActionMethodQueryParameter p | p = this.asParameter()) }
 
   override string getSourceType() { result = "Play Query Parameters" }
+}
+
+private class RatpackHttpMethodSource extends RemoteFlowSource {
+  RatpackHttpMethodSource() {
+    exists(RatpackGetRequestDataMethod m | m = this.asExpr().(MethodAccess).getMethod())
+  }
+
+  override string getSourceType() { result = "Ratpack request method" }
+}
+
+private class RatpackHttpStreamSource extends RemoteFlowSource {
+  RatpackHttpStreamSource() {
+    exists(MethodAccess ma |
+      ma.getMethod() instanceof RatpackHttpTypedDataWriteMethod and
+      ma.getArgument(0) = this.asExpr()
+    )
+  }
+
+  override string getSourceType() { result = "Ratpack request stream" }
 }
 
 private class SpringServletInputParameterSource extends RemoteFlowSource {
