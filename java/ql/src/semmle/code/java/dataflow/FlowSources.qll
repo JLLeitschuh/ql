@@ -116,7 +116,7 @@ private class PlayParameterSource extends RemoteFlowSource {
 
 private class RatpackHttpMethodSource extends RemoteFlowSource {
   RatpackHttpMethodSource() {
-    exists(RatpackGetRequestDataMethod m | m = this.asExpr().(MethodAccess).getMethod())
+    this.asExpr().(MethodAccess).getMethod() instanceof RatpackGetRequestDataMethod
   }
 
   override string getSourceType() { result = "Ratpack request method" }
