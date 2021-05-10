@@ -114,25 +114,6 @@ private class PlayParameterSource extends RemoteFlowSource {
   override string getSourceType() { result = "Play Query Parameters" }
 }
 
-private class RatpackHttpMethodSource extends RemoteFlowSource {
-  RatpackHttpMethodSource() {
-    this.asExpr().(MethodAccess).getMethod() instanceof RatpackGetRequestDataMethod
-  }
-
-  override string getSourceType() { result = "Ratpack request method" }
-}
-
-private class RatpackHttpStreamSource extends RemoteFlowSource {
-  RatpackHttpStreamSource() {
-    exists(MethodAccess ma |
-      ma.getMethod() instanceof RatpackHttpTypedDataWriteMethod and
-      ma.getArgument(0) = this.asExpr()
-    )
-  }
-
-  override string getSourceType() { result = "Ratpack request stream" }
-}
-
 private class SpringServletInputParameterSource extends RemoteFlowSource {
   SpringServletInputParameterSource() {
     this.asParameter() = any(SpringRequestMappingParameter srmp | srmp.isTaintedInput())
